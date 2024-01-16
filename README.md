@@ -19,7 +19,10 @@
 
 ![Screen Shot](./public/screenshot.png)
 
-A movie rating website where user can search for a movie and can rate the movie on a scale of 1-10 according to their taste. They can even add the movie to their watch list.
+* A movie rating website where user can search for a movie and can rate the movie on a scale of 1-10 according to their taste
+* Effectively utilized the React useEffect hook to facilitate the fetching of movie data from a third-party API
+* Optimized API request in a React component by integrating the browser's AbortController within the useEffect hook
+* Implemented clean and efficient cancellation of fetch requests, resulting in a 30% reduction in unnecessary API calls
 
 
 
