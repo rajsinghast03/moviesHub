@@ -7,6 +7,19 @@ export function useMovies(query) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const urlencoded = new URLSearchParams();
+  urlencoded.append("client_id", "app-ims");
+  urlencoded.append("grant_type", "password");
+  urlencoded.append("username", "forkit-hackathon");
+  urlencoded.append("password", "forkitiiitdelhi");
+  urlencoded.append("scope", "openid");
+
+  const requestOptions = {
+    method: "POST",
+    body: urlencoded,
+    redirect: "follow",
+  };
+
   useEffect(
     function () {
       const controller = new AbortController();
@@ -17,7 +30,7 @@ export function useMovies(query) {
 
           const res = await fetch(
             `https://www.omdbapi.com/?&apikey=${KEY}&s=${query}`,
-            { signal: controller.signal }
+            requestOptions
           );
 
           if (!res.ok)

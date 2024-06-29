@@ -10,7 +10,7 @@ const KEY = process.env.REACT_APP_API_KEY;
 export default function App() {
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  const { movies, isLoading, error } = useMovies(query); //custom hook
+  const { movies, isLoading, error } = useMovies(query);
   const [watched, setWatched] = useLocalStorageState([], "watched");
 
   function handleSelectMovie(id) {
@@ -23,8 +23,6 @@ export default function App() {
 
   function handleAddWatch(movie) {
     setWatched((watched) => [...watched, movie]);
-
-    // localStorage.setItem("watched", JSON.stringify([...watched, movie]));
   }
 
   function handleDeleteWatched(id) {
@@ -97,7 +95,7 @@ function Logo() {
   return (
     <div className="logo">
       <span role="img">🍿</span>
-      <h1>MoivesHub</h1>
+      <h1>MoviesHub</h1>
     </div>
   );
 }
@@ -162,28 +160,6 @@ function Box({ children }) {
     </div>
   );
 }
-
-// function WatchedBox() {
-//   const [watched, setWatched] = useState(tempWatchedData);
-//   const [isOpen2, setIsOpen2] = useState(true);
-
-//   return (
-//     <div className="box">
-//       <button
-//         className="btn-toggle"
-//         onClick={() => setIsOpen2((open) => !open)}
-//       >
-//         {isOpen2 ? "–" : "+"}
-//       </button>
-//       {isOpen2 && (
-//         <>
-//           <WatchedSummary watched={watched} />
-//           <WatchedMoviesList watched={watched} />
-//         </>
-//       )}
-//     </div>
-//   );
-// }
 
 function MovieList({ movies, onSelectMovie }) {
   return (
@@ -303,22 +279,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 
   useKey("Escape", onCloseMovie);
 
-  // useEffect(
-  //   function () {
-  //     function callBack(e) {
-  //       if (e.code === "Escape") {
-  //         onCloseMovie();
-  //       }
-  //     }
-  //     document.addEventListener("keydown", callBack);
-
-  //     return function () {
-  //       document.removeEventListener("keydown", callBack);
-  //     };
-  //   },
-  //   [onCloseMovie]
-  // );
-
   useEffect(
     function () {
       if (!title) return;
@@ -395,8 +355,12 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
             <p>
               <em>{plot}</em>
             </p>
-            <p>Starring: {actors}</p>
-            <p>Director: {director}</p>
+            <p>
+              <span className="bold">Starring</span>: {actors}
+            </p>
+            <p>
+              <span className="bold">Director</span>: {director}
+            </p>
           </section>
         </>
       )}
